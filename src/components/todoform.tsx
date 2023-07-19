@@ -5,6 +5,7 @@ function Todoform({ updateTodo }: { updateTodo: Function }) {
 
   return (
     <form
+      name="add todo form"
       className="mt-2 flex gap-2 w-min mb-2 mx-auto"
       onSubmit={(event) => {
         event.preventDefault();
