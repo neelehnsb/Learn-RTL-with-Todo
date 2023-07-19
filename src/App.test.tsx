@@ -10,7 +10,7 @@ describe("render correctly", () => {
   });
   test("add button render", () => {
     render(<App />);
-    const addbtnElement = screen.getByRole("button", { name: /add/i });
+    const addbtnElement = screen.getByRole("button", { name: "Add" });
     expect(addbtnElement).toBeInTheDocument();
   });
 });
