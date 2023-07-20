@@ -6,7 +6,7 @@ function Todoform({ updateTodo }: { updateTodo: Function }) {
   return (
     <form
       name="add todo form"
-      className="mt-2 flex gap-2 w-min mb-2 mx-auto"
+      className="flex gap-2 w-min mb-2 mx-auto"
       onSubmit={(event) => {
         event.preventDefault();
         if (todo.length) updateTodo(todo);
@@ -20,7 +20,7 @@ function Todoform({ updateTodo }: { updateTodo: Function }) {
         onChange={(e) => setTodo(e.target.value)}
         placeholder="enter a todo"
       />
-      <button className=" px-4 py-1 rounded-lg text-white bg-black text-xl">
+      <button className=" px-4 py-1 rounded-lg border-2 border-white text-white bg-black text-xl">
         Add
       </button>
     </form>

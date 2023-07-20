@@ -15,7 +15,7 @@ export const EditComponent = ({
           event.preventDefault();
           eTodo.length ? saveEdit(eTodo) : alert("cannot be empty");
         }}
-        className="flex relative w-96 mx-auto rounded-2xl mt-20 bg-black flex-col gap-3 p-5 items-center text-center"
+        className="flex relative w-96 mx-auto rounded-2xl border-2 border-white mt-20 bg-black flex-col gap-3 p-5 items-center text-center"
       >
         <input
           className="border-[1px] px-2 border-black rounded-lg"

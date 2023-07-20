@@ -49,7 +49,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App bg-black pt-2 h-screen">
       <Todoform updateTodo={updateTodo} />
       <Todolist todos={todos} deleteTodo={deleteTodo} editTodo={editTodo} />
       {editCheck ? <EditComponent close={close} saveEdit={saveEdit} /> : ""}
