@@ -1,18 +1,20 @@
 import TrashIcon from "./img/trash.png";
 import EditIcon from "./img/edit.png";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Todolist = ({
   todos,
   deleteTodo,
   editTodo,
+  taskPage,
 }: {
   todos: { name: string; tags: string[]; description: string }[];
   deleteTodo: Function;
   editTodo: Function;
+  taskPage: Function;
 }) => {
   const [search, setSearch] = useState<string>("");
-
   return (
     <div className="flex flex-col gap-2 h-96 p-4  bg-black border-4 rounded-lg border-white max-w-[600px] mx-auto">
       <div className=" w-8/12 mx-auto flex items-center">
@@ -42,12 +44,23 @@ const Todolist = ({
           .map((todo, index) => (
             <div className="flex justify-between " key={todo.name}>
               <div className="bg-white px-2 flex gap-4 rounded-lg">
-                <p key={index} className="text-lg text-black font-extrabold">
-                  {todo.name}
-                </p>
+                <div>
+                  <button
+                    onClick={() => {
+                      taskPage(todo.name);
+                    }}
+                    key={index}
+                    className="text-2xl text-black font-extrabold"
+                  >
+                    {todo.name}
+                  </button>
+                </div>
+
                 <div className="flex gap-2">
                   {todo.tags.map((tag, index) => (
-                    <p className=" text-gray-400">{tag}</p>
+                    <p key={tag} className=" text-gray-400 h-min my-auto">
+                      {tag}
+                    </p>
                   ))}
                 </div>
               </div>
