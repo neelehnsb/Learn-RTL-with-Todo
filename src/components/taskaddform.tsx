@@ -1,6 +1,4 @@
-import { useReducer, useState } from "react";
-
-const reducer = () => {};
+import { useState } from "react";
 
 export function TaskAddForm({
   closetaskadd,
@@ -67,7 +65,7 @@ export function TaskAddForm({
             closetaskadd();
           }}
         >
-          Add Task
+          {EditCheck ? "Edit" : "Add"}
         </button>
         <button
           className="absolute top-2 right-3 text-white bg-black border-2 px-3 rounded-lg border-white"
