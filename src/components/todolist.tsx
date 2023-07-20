@@ -7,7 +7,7 @@ const Todolist = ({
   deleteTodo,
   editTodo,
 }: {
-  todos: string[];
+  todos: { name: string; tags: string[]; description: string }[];
   deleteTodo: Function;
   editTodo: Function;
 }) => {
@@ -37,15 +37,19 @@ const Todolist = ({
       <div className="flex flex-col gap-2 overflow-y-scroll w-9/12 mx-auto">
         {todos
           .filter((todo) => {
-            console.log(search);
-            return todo.includes(search);
+            return todo.name.includes(search) || todo.tags.includes(search);
           })
           .map((todo, index) => (
-            <div className="flex justify-between " key={todo}>
-              <div className="bg-white px-2 rounded-lg">
+            <div className="flex justify-between " key={todo.name}>
+              <div className="bg-white px-2 flex gap-4 rounded-lg">
                 <p key={index} className="text-lg text-black font-extrabold">
-                  {todo}
+                  {todo.name}
                 </p>
+                <div className="flex gap-2">
+                  {todo.tags.map((tag, index) => (
+                    <p className=" text-gray-400">{tag}</p>
+                  ))}
+                </div>
               </div>
 
               <div className="flex gap-5">
@@ -53,7 +57,7 @@ const Todolist = ({
                   <img
                     src={TrashIcon}
                     alt={`${todo}_trash`}
-                    id={todo}
+                    id={todo.name}
                     className="h-5 bg-white cursor-pointer"
                     onClick={(event) => {
                       deleteTodo(event.currentTarget.id);
@@ -65,7 +69,7 @@ const Todolist = ({
                   <img
                     src={EditIcon}
                     alt={`${todo}_edit`}
-                    id={todo}
+                    id={todo.name}
                     className="h-5 cursor-pointer "
                     onClick={(event) => {
                       editTodo(event.currentTarget.id);

@@ -1,21 +1,29 @@
 import { useState } from "react";
 import Todoform from "./components/todoform";
 import Todolist from "./components/todolist";
-import { EditComponent } from "./components/editComponent";
+import { TaskAddForm } from "./components/taskaddform";
 
-let taskToEdit = "";
+let indexToEdit = -1;
 
 function App() {
-  const [todos, setTodos] = useState<string[]>([]);
+  const [todos, setTodos] = useState<
+    { name: string; tags: string[]; description: string }[]
+  >([]);
   const [editCheck, setEditCheck] = useState<boolean>(false);
+  const [addCheck, setAddCheck] = useState<boolean>(false);
 
-  const updateTodo = (todo: string): void => {
-    todos.indexOf(todo) === -1
-      ? setTodos((prev) => [...prev, todo])
-      : alert("please use different task name");
+  const renderAdd = () => {
+    setAddCheck(true);
   };
+
   const deleteTodo = (todo: string): void => {
-    let Index = todos.indexOf(todo);
+    let Index = -1;
+    for (let i = 0; i < todos.length; i++) {
+      if (todos[i].name === todo) {
+        Index = i;
+        break;
+      }
+    }
     if (Index !== -1) {
       let temp = [...todos];
       temp.splice(Index, 1);
@@ -25,34 +33,79 @@ function App() {
 
   const editTodo = (TaskToEdit: string) => {
     setEditCheck(true);
-    taskToEdit = TaskToEdit;
+    for (let i = 0; i < todos.length; i++) {
+      if (todos[i].name === TaskToEdit) {
+        indexToEdit = i;
+      }
+    }
+  };
+
+  const editSubmit = ({
+    name,
+    tags,
+    description,
+  }: {
+    name: string;
+    tags: string[];
+    description: string;
+  }) => {
+    todos[indexToEdit].name = name;
+    todos[indexToEdit].tags = tags;
+    todos[indexToEdit].description = description;
+    setTodos([...todos]);
   };
 
   const close = () => {
     setEditCheck(false);
   };
 
-  const saveEdit = (eTodo: string) => {
-    let IndexToEdit = todos.indexOf(taskToEdit);
-    let temp = [...todos];
-    let success = false;
-    if (todos.indexOf(eTodo) === -1) {
-      temp[IndexToEdit] = eTodo;
-      setTodos([...temp]);
-      success = true;
-    } else {
-      alert("Task already exists");
-    }
-    if (success) {
-      close();
+  const closetaskadd = () => {
+    setAddCheck(false);
+    setEditCheck(false);
+  };
+
+  const addTask = ({
+    name,
+    tags,
+    description,
+  }: {
+    name: string;
+    tags: string[];
+    description: string;
+  }) => {
+    const temp = todos.filter((todo) => todo.name === name);
+    if (temp.length === 0 && name.length > 0) {
+      setTodos([
+        ...todos,
+        { name: name, tags: tags, description: description },
+      ]);
     }
   };
 
   return (
     <div className="App bg-black pt-2 h-screen">
-      <Todoform updateTodo={updateTodo} />
+      <Todoform renderAdd={renderAdd} />
       <Todolist todos={todos} deleteTodo={deleteTodo} editTodo={editTodo} />
-      {editCheck ? <EditComponent close={close} saveEdit={saveEdit} /> : ""}
+      {editCheck ? (
+        <TaskAddForm
+          closetaskadd={closetaskadd}
+          addtask={addTask}
+          EditCheck={editCheck}
+          editSubmit={editSubmit}
+        />
+      ) : (
+        ""
+      )}
+      {addCheck ? (
+        <TaskAddForm
+          closetaskadd={closetaskadd}
+          addtask={addTask}
+          EditCheck={editCheck}
+          editSubmit={editSubmit}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }
