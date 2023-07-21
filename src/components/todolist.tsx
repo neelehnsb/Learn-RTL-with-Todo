@@ -45,15 +45,17 @@ const Todolist = ({
             <div className="flex justify-between " key={todo.name}>
               <div className="bg-white px-2 flex gap-4 rounded-lg">
                 <div>
-                  <button
-                    onClick={() => {
+                  <a
+                    onClick={(e) => {
+                      e.preventDefault();
                       taskPage(todo.name);
+                      console.log(todo.name);
                     }}
                     key={index}
-                    className="text-2xl text-black font-extrabold"
+                    className="text-2xl cursor-pointer text-black font-extrabold"
                   >
                     {todo.name}
-                  </button>
+                  </a>
                 </div>
 
                 <div className="flex gap-2">

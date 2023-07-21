@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Todoform from "../todoform";
 import Todolist from "../todolist";
 import { TaskAddForm } from "../taskaddform";
@@ -7,17 +7,44 @@ import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 let indexToEdit = -1;
 let indexToShow = -1;
 
-export const Home = ({ taskName }: { taskName: Function }) => {
-  const navigate = useNavigate();
+export const Home = ({
+  taskName,
+  oldtodos,
+}: {
+  taskName: Function;
+  oldtodos: { name: string; tags: string[]; description: string }[];
+}) => {
+  //   const [savedForm, setSavedForm, clearLocalStorage] = useLocalStorage("todos");
+  console.log(oldtodos);
+  let a: { name: string; tags: string[]; description: string }[] = [];
   const [todos, setTodos] = useState<
     { name: string; tags: string[]; description: string }[]
-  >([]);
+  >(oldtodos || []);
   const [editCheck, setEditCheck] = useState<boolean>(false);
   const [addCheck, setAddCheck] = useState<boolean>(false);
 
   const renderAdd = () => {
     setAddCheck(true);
   };
+
+  //   useEffect(() => {
+  //     if (localStorage.getItem("todos")) {
+  //       let a = localStorage.getItem("todos");
+  //       let b: { name: string; tags: string[]; description: string }[] = [];
+  //       if (a) {
+  //         b = JSON.parse(a);
+  //       }
+  //       setTodos(b);
+  //     }
+  //   }, []);
+
+  //   useEffect(() => {
+  //     let a = JSON.parse(String(localStorage.getItem("todos")));
+  //     if (!a) {
+  //       setTodos([...a]);
+  //       console.log(todos);
+  //     }
+  //   }, [null]);
 
   const deleteTodo = (todo: string): void => {
     let Index = -1;
@@ -94,14 +121,13 @@ export const Home = ({ taskName }: { taskName: Function }) => {
     taskName(
       todos[indexToShow].name,
       todos[indexToShow].tags,
-      todos[indexToShow].description
+      todos[indexToShow].description,
+      indexToShow,
+      todos
     );
-    navigate(`/task_${page}`);
+    console.log(indexToShow);
   };
 
-  let a = "df";
-  let b = ["sf", "wf"];
-  let c = "fwf";
   return (
     <div className=" bg-black pt-2 h-screen">
       <Todoform renderAdd={renderAdd} />

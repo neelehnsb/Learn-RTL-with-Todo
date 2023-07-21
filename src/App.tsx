@@ -6,32 +6,49 @@ import { TaskView } from "./components/pages/taskView";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { Home } from "./components/pages/home";
 
-let taskname = "";
+let taskname = "dvdv";
 let tasktags = ["try"];
-let taskdescription = "";
+let taskdescription = "vdvdcv";
+
+let oldtodos: { name: string; tags: string[]; description: string }[] = [];
 
 function App() {
-  const taskName = (name: string, tags: string[], description: string) => {
-    [taskname, tasktags, taskdescription] = [name, tags, description];
+  const navigate = useNavigate();
+  const taskName = (
+    name: string,
+    tags: string[],
+    description: string,
+    indexToShow: string,
+    todos: { name: string; tags: string[]; description: string }[]
+  ) => {
+    [taskname, tasktags, taskdescription, oldtodos] = [
+      name,
+      tags,
+      description,
+      todos,
+    ];
+    navigate(`/${indexToShow}`);
   };
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home taskName={taskName} />} />
-          <Route
-            path={`/task_${taskname}`}
-            element={
-              <TaskView
-                name={taskname}
-                tags={tasktags}
-                description={taskdescription}
-              />
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={<Home taskName={taskName} oldtodos={oldtodos} />}
+        />
+        <Route
+          path="/:id"
+          element={
+            <TaskView
+              name={taskname}
+              tags={tasktags}
+              description={taskdescription}
+              todos={oldtodos}
+            />
+          }
+        />
+      </Routes>
     </>
   );
 }
