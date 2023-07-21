@@ -14,7 +14,6 @@ export const Home = ({
   taskName: Function;
   oldtodos: { name: string; tags: string[]; description: string }[];
 }) => {
-  //   const [savedForm, setSavedForm, clearLocalStorage] = useLocalStorage("todos");
   console.log(oldtodos);
   let a: { name: string; tags: string[]; description: string }[] = [];
   const [todos, setTodos] = useState<
@@ -26,25 +25,6 @@ export const Home = ({
   const renderAdd = () => {
     setAddCheck(true);
   };
-
-  //   useEffect(() => {
-  //     if (localStorage.getItem("todos")) {
-  //       let a = localStorage.getItem("todos");
-  //       let b: { name: string; tags: string[]; description: string }[] = [];
-  //       if (a) {
-  //         b = JSON.parse(a);
-  //       }
-  //       setTodos(b);
-  //     }
-  //   }, []);
-
-  //   useEffect(() => {
-  //     let a = JSON.parse(String(localStorage.getItem("todos")));
-  //     if (!a) {
-  //       setTodos([...a]);
-  //       console.log(todos);
-  //     }
-  //   }, [null]);
 
   const deleteTodo = (todo: string): void => {
     let Index = -1;
