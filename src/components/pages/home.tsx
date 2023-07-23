@@ -14,7 +14,6 @@ export const Home = ({
   taskName: Function;
   oldtodos: { name: string; tags: string[]; description: string }[];
 }) => {
-  console.log(oldtodos);
   let a: { name: string; tags: string[]; description: string }[] = [];
   const [todos, setTodos] = useState<
     { name: string; tags: string[]; description: string }[]
@@ -105,7 +104,6 @@ export const Home = ({
       indexToShow,
       todos
     );
-    console.log(indexToShow);
   };
 
   return (

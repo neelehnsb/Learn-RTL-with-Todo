@@ -1,3 +1,4 @@
+import { Console } from "console";
 import { useState } from "react";
 
 export function TaskAddForm({
@@ -12,7 +13,7 @@ export function TaskAddForm({
   editSubmit: Function;
 }) {
   const [name, setName] = useState<string>("");
-  const [tags, setTags] = useState<string[]>([]);
+  let [tags, setTags] = useState<string[]>([]);
   const [tagstring, setTagString] = useState<string>("");
   const [description, setDescription] = useState<string>("");
 
@@ -40,7 +41,6 @@ export function TaskAddForm({
             type="text"
             onChange={(e) => {
               setTagString(e.target.value);
-              setTags(tagstring.split(","));
             }}
           ></input>
         </div>
@@ -59,6 +59,8 @@ export function TaskAddForm({
         <button
           className="bg-black border-2 w-30 px-3 py-2 rounded-md mx-auto border-white text-white"
           onClick={() => {
+            tags = tagstring.split(",");
+            setTags([...tags]);
             EditCheck
               ? editSubmit({ name: name, tags: tags, description: description })
               : addtask({ name: name, tags: tags, description: description });

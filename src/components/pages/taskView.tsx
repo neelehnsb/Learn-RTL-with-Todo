@@ -34,7 +34,7 @@ export const TaskView = ({
             <div className="flex gap-4">
               <p className="text-lg  text-lime-300 font-extrabold ">Tags: </p>
               {tags.map((tag, index) => (
-                <p className="text-yellow-300 w-min mx-auto" key={index}>
+                <p className="text-yellow-300 w-fit mx-auto" key={index}>
                   #{tag}
                 </p>
               ))}
