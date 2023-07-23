@@ -36,13 +36,16 @@ const Todolist = ({
           ></input>
         </form>
       </div>
-      <div className="flex flex-col gap-2 overflow-y-scroll w-10/12 mx-auto">
+      <div className="flex flex-col gap-7 overflow-y-scroll w-10/12 mx-auto">
         {todos
           .filter((todo) => {
             return todo.name.includes(search) || todo.tags.includes(search);
           })
           .map((todo, index) => (
-            <div className="flex justify-between gap-3" key={todo.name}>
+            <div
+              className="flex justify-between gap-3 items-center mr-2"
+              key={todo.name}
+            >
               <div className="bg-white px-2 flex flex-col  w-[600px] rounded-lg">
                 <div>
                   <a
