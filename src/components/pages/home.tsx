@@ -63,10 +63,6 @@ export const Home = ({
     setTodos([...todos]);
   };
 
-  const close = () => {
-    setEditCheck(false);
-  };
-
   const closetaskadd = () => {
     setAddCheck(false);
     setEditCheck(false);
@@ -121,6 +117,8 @@ export const Home = ({
           addtask={addTask}
           EditCheck={editCheck}
           editSubmit={editSubmit}
+          indexToEdit={indexToEdit}
+          todoToEdit={todos[indexToEdit]}
         />
       ) : (
         ""
@@ -131,6 +129,8 @@ export const Home = ({
           addtask={addTask}
           EditCheck={editCheck}
           editSubmit={editSubmit}
+          indexToEdit={indexToEdit}
+          todoToEdit={todos[indexToEdit]}
         />
       ) : (
         ""

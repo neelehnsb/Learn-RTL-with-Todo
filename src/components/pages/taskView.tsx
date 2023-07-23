@@ -1,5 +1,3 @@
-import { Link, Navigate } from "react-router-dom";
-
 import { useNavigate } from "react-router-dom";
 
 export const TaskView = ({
@@ -28,19 +26,23 @@ export const TaskView = ({
           back
         </button>
         <div className="flex flex-col gap-4">
-          <p className="text-white text-3xl w-fit mx-auto ">{name}</p>
+          <h1 className="text-white text-3xl max-w-[550px] text-ellipsis overflow-hidden mx-auto ">
+            {name}
+          </h1>
           <hr className="border-gray-700"></hr>
           <div className="w-11/12 flex justify-center mx-auto">
             <div className="flex gap-4">
-              <p className="text-lg  text-lime-300 font-extrabold ">Tags: </p>
+              <h2 className="text-lg  text-lime-300 font-extrabold ">Tags: </h2>
               {tags.map((tag, index) => (
-                <p className="text-yellow-300 w-fit mx-auto" key={index}>
+                <h4 className="text-yellow-300 w-fit mx-auto" key={index}>
                   #{tag}
-                </p>
+                </h4>
               ))}
             </div>
           </div>
-          <p className="text-white text-xl w-fit mx-auto ">{description}</p>
+          <div className="max-w-[550px] text-center mx-auto">
+            <h3 className="text-white text-xl w-min mx-auto ">{description}</h3>
+          </div>
         </div>
       </div>
     </div>

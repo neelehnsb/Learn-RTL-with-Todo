@@ -47,25 +47,29 @@ const Todolist = ({
               key={todo.name}
             >
               <div className="bg-white px-2 flex flex-col  w-[600px] rounded-lg">
-                <div>
-                  <a
+                <div className="w-[520px]">
+                  <h2
                     onClick={(e) => {
                       e.preventDefault();
                       taskPage(todo.name);
-                      console.log(todo.name);
                     }}
                     key={index}
-                    className="text-2xl cursor-pointer text-black font-extrabold"
+                    title={`task_${index}`}
+                    className="text-2xl  truncate cursor-pointer text-black font-extrabold hover:underline"
                   >
                     {todo.name}
-                  </a>
+                  </h2>
                 </div>
 
                 <div className="flex gap-2">
                   {todo.tags.map((tag, index) => (
-                    <p key={tag} className=" text-gray-400 h-min my-auto">
+                    <h6
+                      title={`${todo.name}_tag${index}`}
+                      key={`${todo.name}_tag${index}`}
+                      className=" text-gray-400 h-min"
+                    >
                       {tag}
-                    </p>
+                    </h6>
                   ))}
                 </div>
               </div>
@@ -75,7 +79,7 @@ const Todolist = ({
                   <div className="p-1 bg-white rounded-lg ">
                     <img
                       src={TrashIcon}
-                      alt={`${todo}_trash`}
+                      alt={`${todo.name}_trash`}
                       id={todo.name}
                       className="h-5 w-5 bg-white cursor-pointer"
                       onClick={(event) => {
@@ -87,7 +91,7 @@ const Todolist = ({
                   <div className="p-1 bg-white rounded-lg ">
                     <img
                       src={EditIcon}
-                      alt={`${todo}_edit`}
+                      alt={`${todo.name}_edit`}
                       id={todo.name}
                       className="h-5 w-5 cursor-pointer "
                       onClick={(event) => {

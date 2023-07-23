@@ -1,14 +1,10 @@
-import { useState } from "react";
-import Todoform from "./components/todoform";
-import Todolist from "./components/todolist";
-import { TaskAddForm } from "./components/taskaddform";
 import { TaskView } from "./components/pages/taskView";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { Home } from "./components/pages/home";
 
-let taskname = "dvdv";
-let tasktags = ["try"];
-let taskdescription = "vdvdcv";
+let taskname = "";
+let tasktags = [""];
+let taskdescription = "";
 
 let oldtodos: { name: string; tags: string[]; description: string }[] = [];
 

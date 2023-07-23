@@ -6,20 +6,28 @@ export function TaskAddForm({
   addtask,
   EditCheck,
   editSubmit,
+  indexToEdit,
+  todoToEdit,
 }: {
   closetaskadd: Function;
   addtask: Function;
   EditCheck: boolean;
   editSubmit: Function;
+  indexToEdit: number;
+  todoToEdit: { name: string; tags: string[]; description: string };
 }) {
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>(EditCheck ? todoToEdit.name : "");
   let [tags, setTags] = useState<string[]>([]);
-  const [tagstring, setTagString] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  const [tagstring, setTagString] = useState<string>(
+    EditCheck ? todoToEdit.tags.join(",") : ""
+  );
+  const [description, setDescription] = useState<string>(
+    EditCheck ? todoToEdit.description : ""
+  );
 
   return (
     <div className="h-[100vh] rounded-lg fixed w-screen top-0 right-0 z-10 backdrop-blur-md">
-      <div className="h-[400px] relative w-96 mx-auto rounded-lg mt-28 flex flex-col gap-4 pt-3 bg-black border-2 border-white">
+      <div className="h-[400px] relative z-10 w-96 mx-auto rounded-lg mt-28 flex flex-col gap-4 pt-3 bg-black border-2 border-white">
         <div className="w-60 mx-auto">
           <p className="text-white w-20 mx-auto">Task name</p>
           <input
@@ -57,9 +65,12 @@ export function TaskAddForm({
         </div>
 
         <button
+          id="add/button"
+          title="add/edit"
           className="bg-black border-2 w-30 px-3 py-2 rounded-md mx-auto border-white text-white"
           onClick={() => {
             tags = tagstring.split(",");
+            tags = tags.filter((tag, index) => tags.indexOf(tag) === index);
             setTags([...tags]);
             EditCheck
               ? editSubmit({ name: name, tags: tags, description: description })
