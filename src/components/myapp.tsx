@@ -1,6 +1,6 @@
-import { TaskView } from "./components/pages/taskView";
+import { TaskView } from "./pages/taskView";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Home } from "./components/pages/home";
+import { Home } from "./pages/home";
 
 let taskname = "";
 let tasktags = [""];
