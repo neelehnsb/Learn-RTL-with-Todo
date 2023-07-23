@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Todoform from "../todoform";
 import Todolist from "../todolist";
 import { TaskAddForm } from "../taskaddform";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 
 let indexToEdit = -1;
 let indexToShow = -1;
@@ -14,7 +13,6 @@ export const Home = ({
   taskName: Function;
   oldtodos: { name: string; tags: string[]; description: string }[];
 }) => {
-  let a: { name: string; tags: string[]; description: string }[] = [];
   const [todos, setTodos] = useState<
     { name: string; tags: string[]; description: string }[]
   >(oldtodos || []);
@@ -117,7 +115,6 @@ export const Home = ({
           addtask={addTask}
           EditCheck={editCheck}
           editSubmit={editSubmit}
-          indexToEdit={indexToEdit}
           todoToEdit={todos[indexToEdit]}
         />
       ) : (
@@ -129,7 +126,6 @@ export const Home = ({
           addtask={addTask}
           EditCheck={editCheck}
           editSubmit={editSubmit}
-          indexToEdit={indexToEdit}
           todoToEdit={todos[indexToEdit]}
         />
       ) : (

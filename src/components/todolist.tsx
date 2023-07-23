@@ -1,7 +1,6 @@
 import TrashIcon from "./img/trash.png";
 import EditIcon from "./img/edit.png";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Todolist = ({
   todos,

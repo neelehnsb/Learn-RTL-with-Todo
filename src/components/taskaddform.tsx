@@ -1,4 +1,3 @@
-import { Console } from "console";
 import { useState } from "react";
 
 export function TaskAddForm({
@@ -6,14 +5,12 @@ export function TaskAddForm({
   addtask,
   EditCheck,
   editSubmit,
-  indexToEdit,
   todoToEdit,
 }: {
   closetaskadd: Function;
   addtask: Function;
   EditCheck: boolean;
   editSubmit: Function;
-  indexToEdit: number;
   todoToEdit: { name: string; tags: string[]; description: string };
 }) {
   const [name, setName] = useState<string>(EditCheck ? todoToEdit.name : "");
@@ -40,6 +37,7 @@ export function TaskAddForm({
             }}
           ></input>
         </div>
+
         <div className="w-60 mx-auto">
           <p className="text-white w-min mx-auto">Tags</p>
           <input
@@ -52,6 +50,7 @@ export function TaskAddForm({
             }}
           ></input>
         </div>
+
         <div className="w-60 mx-auto">
           <p className="text-white w-min mx-auto">Description</p>
           <textarea
@@ -80,6 +79,7 @@ export function TaskAddForm({
         >
           {EditCheck ? "Edit" : "Add"}
         </button>
+
         <button
           className="absolute top-2 right-3 text-white bg-black border-2 px-3 rounded-lg border-white"
           onClick={() => {

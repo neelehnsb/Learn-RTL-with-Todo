@@ -1,8 +1,4 @@
-import { useState } from "react";
-
 function Todoform({ renderAdd }: { renderAdd: Function }) {
-  const [todo, setTodo] = useState<string>("");
-
   return (
     <div className="w-full flex justify-center h-14">
       <button
