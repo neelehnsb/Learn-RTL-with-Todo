@@ -54,7 +54,7 @@ const Todolist = ({
                     }}
                     key={index}
                     title={`task_${index}`}
-                    className="text-2xl  truncate cursor-pointer text-black font-extrabold hover:underline"
+                    className="text-2xl max-w-fit truncate cursor-pointer text-black font-extrabold hover:underline"
                   >
                     {todo.name}
                   </h2>
