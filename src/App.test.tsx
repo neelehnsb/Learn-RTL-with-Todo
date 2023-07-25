@@ -27,30 +27,30 @@ describe("home page render", () => {
   });
 });
 
-describe("testing adding tasks tasks", () => {
+describe("testing of adding and editing one tasks", () => {
   test("add btn working", async () => {
     render(<App />);
     const addbtn = screen.getByRole("button", { name: /add/i });
-    await user.click(addbtn);
+    act(() => user.click(addbtn));
 
     const nameInput = screen.getByPlaceholderText(/enter task name/i);
     expect(nameInput).toBeInTheDocument();
-    await user.click(nameInput);
-    await user.keyboard(String(task1.name));
+    act(() => user.click(nameInput));
+    await act(() => user.keyboard(String(task1.name)));
 
     const tagInput = screen.getByPlaceholderText(/enter task tag/i);
     expect(tagInput).toBeInTheDocument();
-    await user.click(tagInput);
-    await user.keyboard(task1.tags.join());
+    act(() => user.click(tagInput));
+    await act(() => user.keyboard(task1.tags.join()));
 
     const descriptionInput = screen.getByPlaceholderText(/enter description/i);
     expect(descriptionInput).toBeInTheDocument();
-    await user.click(descriptionInput);
-    await user.keyboard(task1.description);
+    act(() => user.click(descriptionInput));
+    await act(() => user.keyboard(task1.description));
 
     const addeditBtn = screen.getByTitle(/add\/edit/i);
     expect(addeditBtn).toBeInTheDocument();
-    await user.click(addeditBtn);
+    act(() => user.click(addeditBtn));
 
     const task1name = screen.getByText(task1.name);
     expect(task1name).toBeInTheDocument();
@@ -74,7 +74,14 @@ describe("testing adding tasks tasks", () => {
     });
     expect(task1EditBtn).toBeInTheDocument();
 
-    user.click(task1EditBtn);
+    act(() => user.click(task1EditBtn));
+    act(() => user.dblClick(nameInput));
+    await act(() => user.keyboard(task2.name));
+    act(() => user.dblClick(tagInput));
+    await act(() => user.keyboard(task2.tags.join()));
+    act(() => user.dblClick(descriptionInput));
+    await act(() => user.keyboard(task2.description));
+    act(() => user.click(addeditBtn));
   });
 });
 
@@ -82,21 +89,21 @@ describe("edit button working", () => {
   test("Edit Button", async () => {
     render(<App />);
     const addbtn = screen.getByRole("button", { name: /add/i });
-    await user.click(addbtn);
+    act(() => user.click(addbtn));
     const nameInput = screen.getByPlaceholderText(/enter task name/i);
     const tagInput = screen.getByPlaceholderText(/enter task tag/i);
     const descriptionInput = screen.getByPlaceholderText(/enter description/i);
     const addeditBtn = screen.getByTitle(/add\/edit/i);
 
-    await user.click(nameInput);
-    await user.keyboard(task1.description);
+    act(() => user.click(nameInput));
+    await act(() => user.keyboard(task1.description));
 
-    await user.click(tagInput);
-    await user.keyboard(task1.tags.join());
+    act(() => user.click(tagInput));
+    await act(() => user.keyboard(task1.tags.join()));
 
-    await user.click(descriptionInput);
-    await user.keyboard(task1.description);
+    act(() => user.click(descriptionInput));
+    await act(() => user.keyboard(task1.description));
 
-    await user.click(addeditBtn);
+    act(() => user.click(addeditBtn));
   });
 });

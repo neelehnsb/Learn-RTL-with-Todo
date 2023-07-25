@@ -11,7 +11,12 @@ export function TaskAddForm({
   addtask: Function;
   EditCheck: boolean;
   editSubmit: Function;
-  todoToEdit: { name: string; tags: string[]; description: string };
+  todoToEdit: {
+    name: string;
+    tags: string[];
+    description: string;
+    timeInMinutes: number;
+  };
 }) {
   const [name, setName] = useState<string>(EditCheck ? todoToEdit.name : "");
   let [tags, setTags] = useState<string[]>([]);
@@ -20,6 +25,9 @@ export function TaskAddForm({
   );
   const [description, setDescription] = useState<string>(
     EditCheck ? todoToEdit.description : ""
+  );
+  const [timeInMinutes, setTimeInMinutes] = useState<number>(
+    EditCheck ? todoToEdit.timeInMinutes : 0
   );
 
   return (
@@ -63,6 +71,19 @@ export function TaskAddForm({
           ></textarea>
         </div>
 
+        <div className="w-60 mx-auto">
+          <p className="text-white w-min mx-auto">Time</p>
+          <input
+            value={timeInMinutes}
+            placeholder="Enter Time in Minutes"
+            className=" w-60 h-8 px-2 mx-auto rounded-md"
+            type="number"
+            onChange={(e) => {
+              setTimeInMinutes(Number(e.target.value));
+            }}
+          ></input>
+        </div>
+
         <button
           id="add/button"
           title="add/edit"
@@ -72,8 +93,18 @@ export function TaskAddForm({
             tags = tags.filter((tag, index) => tags.indexOf(tag) === index);
             setTags([...tags]);
             EditCheck
-              ? editSubmit({ name: name, tags: tags, description: description })
-              : addtask({ name: name, tags: tags, description: description });
+              ? editSubmit({
+                  name: name,
+                  tags: tags,
+                  description: description,
+                  timeInMinutes: timeInMinutes,
+                })
+              : addtask({
+                  name: name,
+                  tags: tags,
+                  description: description,
+                  timeInMinutes: timeInMinutes,
+                });
             closetaskadd();
           }}
         >

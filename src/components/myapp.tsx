@@ -5,8 +5,14 @@ import { Home } from "./pages/home";
 let taskname = "";
 let tasktags = [""];
 let taskdescription = "";
+let tasktimeInMinutes = 0;
 
-let oldtodos: { name: string; tags: string[]; description: string }[] = [];
+let oldtodos: {
+  name: string;
+  tags: string[];
+  description: string;
+  timeInMinutes: number;
+}[] = [];
 
 export function MyApp() {
   const navigate = useNavigate();
@@ -14,13 +20,20 @@ export function MyApp() {
     name: string,
     tags: string[],
     description: string,
+    timeInMinutes: number,
     indexToShow: string,
-    todos: { name: string; tags: string[]; description: string }[]
+    todos: {
+      name: string;
+      tags: string[];
+      description: string;
+      timeInMinutes: number;
+    }[]
   ) => {
-    [taskname, tasktags, taskdescription, oldtodos] = [
+    [taskname, tasktags, taskdescription, tasktimeInMinutes, oldtodos] = [
       name,
       tags,
       description,
+      timeInMinutes,
       todos,
     ];
     navigate(`/${indexToShow}`);
@@ -40,6 +53,7 @@ export function MyApp() {
               name={taskname}
               tags={tasktags}
               description={taskdescription}
+              timeInMinutes={tasktimeInMinutes}
               todos={oldtodos}
             />
           }

@@ -8,7 +8,12 @@ const Todolist = ({
   editTodo,
   taskPage,
 }: {
-  todos: { name: string; tags: string[]; description: string }[];
+  todos: {
+    name: string;
+    tags: string[];
+    description: string;
+    timeInMinutes: number;
+  }[];
   deleteTodo: Function;
   editTodo: Function;
   taskPage: Function;

@@ -11,10 +11,20 @@ export const Home = ({
   oldtodos,
 }: {
   taskName: Function;
-  oldtodos: { name: string; tags: string[]; description: string }[];
+  oldtodos: {
+    name: string;
+    tags: string[];
+    description: string;
+    timeInMinutes: number;
+  }[];
 }) => {
   const [todos, setTodos] = useState<
-    { name: string; tags: string[]; description: string }[]
+    {
+      name: string;
+      tags: string[];
+      description: string;
+      timeInMinutes: number;
+    }[]
   >(oldtodos || []);
   const [editCheck, setEditCheck] = useState<boolean>(false);
   const [addCheck, setAddCheck] = useState<boolean>(false);
@@ -50,14 +60,17 @@ export const Home = ({
     name,
     tags,
     description,
+    timeInMinutes,
   }: {
     name: string;
     tags: string[];
     description: string;
+    timeInMinutes: number;
   }) => {
     todos[indexToEdit].name = name;
     todos[indexToEdit].tags = tags;
     todos[indexToEdit].description = description;
+    todos[indexToEdit].timeInMinutes = timeInMinutes;
     setTodos([...todos]);
   };
 
@@ -70,16 +83,23 @@ export const Home = ({
     name,
     tags,
     description,
+    timeInMinutes,
   }: {
     name: string;
     tags: string[];
     description: string;
+    timeInMinutes: number;
   }) => {
     const temp = todos.filter((todo) => todo.name === name);
     if (temp.length === 0 && name.length > 0) {
       setTodos([
         ...todos,
-        { name: name, tags: tags, description: description },
+        {
+          name: name,
+          tags: tags,
+          description: description,
+          timeInMinutes: timeInMinutes,
+        },
       ]);
     }
   };
@@ -95,6 +115,7 @@ export const Home = ({
       todos[indexToShow].name,
       todos[indexToShow].tags,
       todos[indexToShow].description,
+      todos[indexToShow].timeInMinutes,
       indexToShow,
       todos
     );
